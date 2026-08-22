@@ -1,0 +1,5 @@
+name: Primeiro-Pipeline
+
+on: 
+   push:
+        branches: [main]
