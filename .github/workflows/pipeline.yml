@@ -1,4 +1,4 @@
-name: Primeiro-Pipeline
+name: Primeiro pipeline
 
 on: 
    push:
@@ -10,5 +10,5 @@ jobs:
 
       steps:
       - name: Baixar Código do Repositório
-         uses: actions/checkout@v4
+        uses: actions/checkout@v4
                 
