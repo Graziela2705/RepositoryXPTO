@@ -15,6 +15,16 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
+
+      - name: Instalar Dependências
+        run: pip install pytest
+
+   deploy:
+      needs: teste
+      runs-on: ubuntu-latest
+      steps:
+      - run: echo "Deploy realizado com sucesso!"
+
         
                 
