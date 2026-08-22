@@ -20,6 +20,10 @@ jobs:
       - name: Instalar Dependências
         run: pip install pytest
 
+      - name: Execução de Testes
+        run: pytest
+        
+
    deploy:
       needs: teste
       runs-on: ubuntu-latest
