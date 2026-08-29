@@ -1,6 +1,6 @@
 using Xunit;
 
-public class CalculadoraTests
+public class app
 {
 
 

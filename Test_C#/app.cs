@@ -1,4 +1,4 @@
-public class app
+public class Calculadora
 {
     public static double Soma(double a, double b)
     {

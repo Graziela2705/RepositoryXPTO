@@ -1,11 +1,11 @@
 using Xunit;
 
-public class CalculadoraTests
+public class app
 {
 
 
 [Fact]
-    public void TesteSubtracao()
+    public void TestSubtracao()
     {
         double resultado = Calculadora.Subtracao(5, 3);
 

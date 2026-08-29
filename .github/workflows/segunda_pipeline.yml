@@ -3,14 +3,14 @@ name: Segunda pipeline
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-
-  teste:
+  testes:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Baixar Código do Repositório
         uses: actions/checkout@v4
 
@@ -20,17 +20,16 @@ jobs:
           dotnet-version: '6.0.x'
 
       - name: Restaurar Dependências
-        run: dotnet restore
+        run: dotnet restore "Test_C#/Test_C#.csproj"
 
       - name: Compilar Projeto
-        run: dotnet build --no-restore
+        run: dotnet build "Test_C#/Test_C#.csproj" --no-restore
 
       - name: Executar Testes
-        run: dotnet test --no-build
-
+        run: dotnet test "Test_C#/Test_C#.csproj" --no-build --logger "console;verbosity=minimal"
 
   deploy:
-    needs: teste
+    needs: testes
     runs-on: ubuntu-latest
 
     steps:
