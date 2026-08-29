@@ -1,0 +1,95 @@
+name: Primeiro pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  analise-codigo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar Código do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar flake8
+        run: python -m pip install flake8
+
+      - name: Análise de Código
+        run: flake8 Test_PY
+
+  testes-unitarios:
+    needs: analise-codigo
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar Código do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar Dependências
+        run: python -m pip install pytest
+
+      - name: Testes Unitários
+        run: pytest Test_PY -q
+
+  cobertura-codigo:
+    needs: testes-unitarios
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar Código do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar Dependências
+        run: python -m pip install pytest pytest-cov
+
+      - name: Cobertura de Código
+        run: pytest Test_PY --cov=Test_PY --cov-report=term-missing --cov-fail-under=80
+
+  analise-seguranca:
+    needs: cobertura-codigo
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar Código do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar bandit
+        run: python -m pip install bandit
+
+      - name: Análise de Segurança
+        run: bandit -r Test_PY -q
+
+  deploy:
+    needs: [analise-codigo, testes-unitarios, cobertura-codigo, analise-seguranca]
+    if: success()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy
+        run: echo "Deploy realizado com sucesso!"
+
+        
+                
