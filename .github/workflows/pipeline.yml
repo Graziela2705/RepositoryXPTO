@@ -1,14 +1,16 @@
 name: Primeiro pipeline
 
-on: 
-   push:
-      branches: [main]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   testesoma:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      steps:
+    steps:
       - name: Baixar Código do Repositório
         uses: actions/checkout@v4
 
@@ -21,13 +23,12 @@ jobs:
         run: pip install pytest
 
       - name: Execução de Testes
-        run: pytest test_soma.py
-        
-  
+        run: pytest Test_PY/test_soma.py
+
   testesubtracao:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      steps:
+    steps:
       - name: Baixar Código do Repositório
         uses: actions/checkout@v4
 
@@ -40,12 +41,12 @@ jobs:
         run: pip install pytest
 
       - name: Execução de Testes
-        run: pytest test_sub.py
+        run: pytest Test_PY/test_sub.py
 
   testemultiplicacao:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      steps:
+    steps:
       - name: Baixar Código do Repositório
         uses: actions/checkout@v4
 
@@ -58,12 +59,12 @@ jobs:
         run: pip install pytest
 
       - name: Execução de Testes
-        run: pytest test_mult.py
+        run: pytest Test_PY/test_mult.py
 
   testedivisao:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      steps:
+    steps:
       - name: Baixar Código do Repositório
         uses: actions/checkout@v4
 
@@ -76,15 +77,15 @@ jobs:
         run: pip install pytest
 
       - name: Execução de Testes
-        run: pytest test_div.py
-
-
+        run: pytest Test_PY/test_div.py
 
   deploy:
-      needs: [testesoma, testesubtracao, testemultiplicacao, testedivisao]
-      runs-on: ubuntu-latest
-      steps:
-      - run: echo "Deploy realizado com sucesso!"
+    needs: [testesoma, testesubtracao, testemultiplicacao, testedivisao]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy
+        run: echo "Deploy realizado com sucesso!"
 
         
                 
