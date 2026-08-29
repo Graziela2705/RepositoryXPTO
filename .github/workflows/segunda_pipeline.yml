@@ -1,34 +1,38 @@
-name: Primeiro pipeline
+name: Segunda pipeline
 
-on: 
-   push:
-      branches: [main]
+on:
+  push:
+    branches: [main]
 
 jobs:
-   teste:
-      runs-on: ubuntu-latest
 
-      steps:
+  teste:
+    runs-on: ubuntu-latest
+
+    steps:
+
       - name: Baixar Código do Repositório
         uses: actions/checkout@v4
 
-      - name: Configurar C#
+      - name: Configurar .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0.x'
 
-      - name: Instalar Dependências
-        run: pip install pytest
+      - name: Restaurar Dependências
+        run: dotnet restore
 
-      - name: Execução de Testes
-        run: pytest
-        
+      - name: Compilar Projeto
+        run: dotnet build --no-restore
 
-   deploy:
-      needs: teste
-      runs-on: ubuntu-latest
-      steps:
-      - run: echo "Deploy realizado com sucesso!"
+      - name: Executar Testes
+        run: dotnet test --no-build
 
-        
-                
+
+  deploy:
+    needs: teste
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy
+        run: echo "Deploy realizado com sucesso!"
