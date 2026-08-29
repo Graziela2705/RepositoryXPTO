@@ -21,7 +21,7 @@ jobs:
         run: pip install pytest
 
       - name: Execução de Testes
-        run: pytest teste_soma.py
+        run: pytest test_soma.py
         
   
   testesubtracao:
@@ -40,7 +40,7 @@ jobs:
         run: pip install pytest
 
       - name: Execução de Testes
-        run: pytest teste_sub.py
+        run: pytest test_sub.py
 
   testemultiplicacao:
       runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
         run: pip install pytest
 
       - name: Execução de Testes
-        run: pytest teste_mult.py
+        run: pytest test_mult.py
 
   testedivisao:
       runs-on: ubuntu-latest
@@ -76,7 +76,7 @@ jobs:
         run: pip install pytest
 
       - name: Execução de Testes
-        run: pytest teste_div.py
+        run: pytest test_div.py
 
 
 
