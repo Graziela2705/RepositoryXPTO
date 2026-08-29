@@ -7,7 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  testes:
+  
+ CalculadoraDivTests:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,8 +29,71 @@ jobs:
       - name: Executar Testes
         run: dotnet test "Test_C#/Test_C#.csproj" --no-build --logger "console;verbosity=minimal"
 
+   CalculadoraMultTests: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar Código do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Restaurar Dependências
+        run: dotnet restore "Test_C#/Test_C#.csproj"
+
+      - name: Compilar Projeto
+        run: dotnet build "Test_C#/Test_C#.csproj" --no-restore
+
+      - name: Executar Testes
+        run: dotnet test "Test_C#/Test_C#.csproj" --no-build --logger "console;verbosity=minimal"
+ 
+  CalculadoraSomaTests: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar Código do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Restaurar Dependências
+        run: dotnet restore "Test_C#/Test_C#.csproj"
+
+      - name: Compilar Projeto
+        run: dotnet build "Test_C#/Test_C#.csproj" --no-restore
+
+      - name: Executar Testes
+        run: dotnet test "Test_C#/Test_C#.csproj" --no-build --logger "console;verbosity=minimal"
+
+  CalculadoraSubTests: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar Código do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Restaurar Dependências
+        run: dotnet restore "Test_C#/Test_C#.csproj"
+
+      - name: Compilar Projeto
+        run: dotnet build "Test_C#/Test_C#.csproj" --no-restore
+
+      - name: Executar Testes
+        run: dotnet test "Test_C#/Test_C#.csproj" --no-build --logger "console;verbosity=minimal"
+       
   deploy:
-    needs: testes
+    needs: [ CalculadoraDivTests, CalculadoraMultTests, CalculadoraSomaTests, CalculadoraSubTests]
     runs-on: ubuntu-latest
 
     steps:

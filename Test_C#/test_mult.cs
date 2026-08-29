@@ -1,6 +1,6 @@
 using Xunit;
 
-public class app
+public class CalculadoraMultTests
 {
 
 
