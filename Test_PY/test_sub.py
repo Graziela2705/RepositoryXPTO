@@ -1,4 +1,4 @@
 from app import subtracao
 
 def test_subtracao():
-    assert subtracao(10, 5) == 5
+    assert subtracao(10, 10) == 5
