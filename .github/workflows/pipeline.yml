@@ -33,23 +33,7 @@ jobs:
       - name: Testes Unitários
         run: pytest --cov=app.py --cov-report=xml
 
-  testesoma:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Baixar Código do Repositório
-        uses: actions/checkout@v4
-
-      - name: Configurar Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Instalar Dependências
-        run: pip install pytest
-
-      - name: Execução de Testes
-        run: pytest Test_PY/test_soma.py
+  
 
   testesubtracao:
     runs-on: ubuntu-latest
