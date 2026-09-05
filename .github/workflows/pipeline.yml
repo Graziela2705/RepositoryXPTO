@@ -9,6 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest,macos-latest]
+        python-version: [3.12, 3.11, 3.10]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -30,6 +31,7 @@ jobs:
 
       - name: Testes Unitários
         run: pytest --cov=app.py --cov-report=xml
+
   testesoma:
     runs-on: ubuntu-latest
 
