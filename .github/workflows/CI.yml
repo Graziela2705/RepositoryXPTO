@@ -41,7 +41,7 @@ jobs:
         run: python -m pip install pytest
 
       - name: Testes Unitários
-        run: pytest Test_PY -q
+        run: pytest app.py -q
 
   cobertura-codigo:
     needs: testes-unitarios
@@ -60,7 +60,7 @@ jobs:
         run: python -m pip install pytest pytest-cov
 
       - name: Cobertura de Código
-        run: pytest Test_PY --cov=Test_PY --cov-report=term-missing --cov-fail-under=80
+        run: pytest app.py --cov=app.py --cov-report=term-missing --cov-fail-under=80
 
   analise-seguranca:
     needs: cobertura-codigo
